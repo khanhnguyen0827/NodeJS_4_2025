@@ -1,5 +1,9 @@
 import express from "express";
 
+import mysql from 'mysql2/promise';
+
+
+
 const app = express();
 
 app.use(express.json());//Chuyển dạng json sang đối tượng js trên req.body
@@ -33,6 +37,11 @@ app.post("/body", (req, res) => {
     console.log(body);
     res.json(body);
 });
+
+// Kết nối đến cơ sở dữ liệu MySQL
+// Sử dụng mysql2/promise để hỗ trợ async/await trên cơ sở dữ liệu MySQL
+const pool = mysql.createPool({
+  uli: 'mysql://root:123456@localhost:3307/BE_Cyber_Community',});
 
 
 
