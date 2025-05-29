@@ -5,7 +5,9 @@ import mysql from 'mysql2/promise';
 // Import mysql2/promise for async/await support
 
 import { Sequelize, DataTypes } from 'sequelize';
+import initModels from "./models/init-models";
 // Import Sequelize for ORM support
+
 
 
 
@@ -47,7 +49,7 @@ app.post("/body", (req, res) => {
 // Kết nối đến cơ sở dữ liệu MySQL
 // Sử dụng mysql2/promise để hỗ trợ async/await trên cơ sở dữ liệu MySQL
 const pool = mysql.createPool({
-  uri: 'mysql://root:123456@localhost:3307/db_cyber_community',});
+  uri: 'mysql://root:081297@localhost:3307/db_cyber_community',});
 // Tạo một pool kết nối đến cơ sở dữ liệu MySQL
 
 // Kiểm tra kết nối đến cơ sở dữ liệu MySQL
@@ -81,7 +83,7 @@ app.get("/MySQL2", async (req, res) => {
 
 
 // Kết nối đến cơ sở dữ liệu MySQL bằng Sequelize
-const sequelize = new Sequelize( 'mysql://root:123456@localhost:3307/db_cyber_community', {
+const sequelize = new Sequelize( 'mysql://root:081297@localhost:3307/db_cyber_community', {
     logging: false, // Tắt logging để không hiển thị các truy vấn SQL trong console
 });
 // Kiểm tra kết nối
@@ -119,18 +121,18 @@ const Roles = sequelize.define('Roles', // Định nghĩa model Roles
       allowNull: true,
       // Cho phép trường description là null
     },
-    ísActive: {
+    isActive: {
       type: Sequelize.BOOLEAN,
       // Định nghĩa trường isActive là kiểu BOOLEAN
       allowNull: false,
       // Không cho phép trường isActive là null
-      defaultValue: true,
+      defaultValue: 0,
       // Đặt giá trị mặc định của trường isActive là true
     },
     deletedBy: {
       type: Sequelize.INTEGER,
       // Định nghĩa trường deletedBy là kiểu INTEGER
-      allowNull: false,
+      allowNull: true,
       // Cho phép trường deletedBy là null
     },
     isDeleted: {
@@ -143,8 +145,7 @@ const Roles = sequelize.define('Roles', // Định nghĩa model Roles
       type: "TIMESTAMP",
       // Định nghĩa trường deletedAt là kiểu TIMESTAMP
       allowNull: true,
-      // Cho phép trường deletedAt là null
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+      
     },
         // Đặt giá trị mặc định của trường deletedAt là thời gian hiện tại
     createdAt: {
@@ -182,11 +183,19 @@ Roles.sync()
   //database first dùngg sequelize-auto
   //sequelize-auto -h localhost -d db_cyber_community -u root -x 123456 -p 3307  --dialect mysql -o ./models -l esm -a ./additional.json
 
+ 
+const models = initModels(sequelize);
+
 //sư dụng orm để thực hiện truy vấn
-app.get("/Sequelize", async (req, res) => {
+app.get("/sequelize", async (req, res,next) => {
     // Lấy dữ liệu từ bảng Roles bằng Sequelize
-    const listRoles = await Roles.findAll() 
-    res.json(listRoles);
+    const listRoles1 = await Roles.findAll();
+    const listRoles2 = await models.Roles.findAll();
+    const result = {
+      "model tự tạo sử dụng sequelize": listRoles1, 
+      "model tự tạo sử dụng sequelize-auto": listRoles2,
+    }
+    res.json(result);
 })
 
 
@@ -204,5 +213,5 @@ app.listen(3069, () => {
  * MySQL2: dùng để tương tác với db bằng  câu lệnh SQl trên cơ sở dữ liệu MySQL https://www.npmjs.com/package/mysql2
  * sequelize: Dùng để tương tác với db bằng ORM (object relational mapping) hay hàm function trên cơ sở dữ liệu MySQL https://sequelize.org
  * sequelize-auto: Dùng để tạo mô hình với cơ sở dữ liệu MySQL còn gọi Database First https://github.com/sequelize/sequelize-auto
- * 
+ * extensionless: giúp import file mà ko cần thêm duôi js
  */

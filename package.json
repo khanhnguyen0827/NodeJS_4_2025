@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "express": "^5.1.0",
+    "extensionless": "^1.9.9",
     "mysql2": "^3.14.1",
     "nodemo": "^1.0.0",
     "sequelize": "^6.37.7",
@@ -12,8 +13,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --watch server.js",
-    "dev": "nodemon server.js"
+    "start": "node --import=extensionless/register server.js",
+    "dev": "nodemon --import=extensionless/register server.js"
   },
   "author": "",
   "license": "ISC",
