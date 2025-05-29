@@ -180,12 +180,12 @@ Roles.sync()
 
 
   //database first dùngg sequelize-auto
-  //sequelize-auto -h <host> -d <database> -u <user> -x [password] -p [port]  --dialect [dialect] -c [/path/to/config] -o [/path/to/models] -t [tableName]
+  //sequelize-auto -h localhost -d db_cyber_community -u root -x 123456 -p 3307  --dialect mysql -o ./models -l esm -a ./additional.json
 
-
+//sư dụng orm để thực hiện truy vấn
 app.get("/Sequelize", async (req, res) => {
     // Lấy dữ liệu từ bảng Roles bằng Sequelize
-    const listRoles = await sequelize.query('SELECT * FROM `Roles`');    
+    const listRoles = await Roles.findAll() 
     res.json(listRoles);
 })
 
