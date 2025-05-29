@@ -5,7 +5,7 @@ import mysql from 'mysql2/promise';
 // Import mysql2/promise for async/await support
 
 import { Sequelize, DataTypes } from 'sequelize';
-import initModels from "./models/init-models";
+import initModels from "./src/models/init-models";
 // Import Sequelize for ORM support
 
 
