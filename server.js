@@ -41,7 +41,34 @@ app.post("/body", (req, res) => {
 // Kết nối đến cơ sở dữ liệu MySQL
 // Sử dụng mysql2/promise để hỗ trợ async/await trên cơ sở dữ liệu MySQL
 const pool = mysql.createPool({
-  uli: 'mysql://root:123456@localhost:3307/BE_Cyber_Community',});
+  uri: 'mysql://root:123456@localhost:3307/db_cyber_community',});
+  try {
+  // For pool initialization, see above
+    // Use pool.query() to execute a query kiểm tra kết nối
+  await pool.query('SELECT 1');
+    console.log("Kết nối đến cơ sở dữ liệu MySQL thành công!");
+} catch (err) {
+  console.log(err);
+}
+
+app.get("/MySQL2", async (req, res) => {
+
+    // For pool initialization, see above
+    // lấy dữ liệu bằng cơ sở dữ liệu MySQL
+    // Sử dụng async/await để lấy dữ liệu từ cơ sở dữ liệu MySQL
+    // Sử dụng pool.query() để thực hiện truy vấn
+    // Lấy dữ liệu từ bảng Roles
+//     const listRows = await pool.query('SELECT * FROM `Roles`');
+//    console.log(listRows);
+
+    const [ rows, fields] = await pool.query('SELECT * FROM `Roles`');
+    // Trả về dữ liệu dưới dạng JSON
+    //rows là mảng các đối tượng, mỗi đối tượng là một hàng dữ liệu trong bảng Roles
+    //fields là mảng các trường dữ liệu trong bảng Roles
+
+    res.json(rows || []); // Trả về dữ liệu dưới dạng JSON, nếu không có dữ liệu thì trả về mảng rỗng
+    // res.json(fields || []); // Trả về dữ liệu dưới dạng JSON, nếu không có dữ liệu thì trả về mảng rỗng
+});
 
 
 
