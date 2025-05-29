@@ -4,8 +4,9 @@ import express from "express";
 import mysql from 'mysql2/promise';
 // Import mysql2/promise for async/await support
 
-import { Sequelize } from 'sequelize';
+import { Sequelize, DataTypes } from 'sequelize';
 // Import Sequelize for ORM support
+
 
 
 
@@ -54,9 +55,9 @@ const pool = mysql.createPool({
   // For pool initialization, see above
     // Use pool.query() to execute a query kiểm tra kết nối
   await pool.query('SELECT 1');
-    console.log("Kết nối đến cơ sở dữ liệu MySQL thành công!");
+    console.log("MySQL: Kết nối đến cơ sở dữ liệu MySQL thành công!");
 } catch (err) {
-  console.log(err, "Kết nối đến cơ sở dữ liệu MySQL khó tạo!");
+  console.log(err, "MySQL2: Kết nối đến cơ sở dữ liệu MySQL khó tạo!");
 }
 
 app.get("/MySQL2", async (req, res) => {
@@ -80,14 +81,107 @@ app.get("/MySQL2", async (req, res) => {
 
 
 // Kết nối đến cơ sở dữ liệu MySQL bằng Sequelize
-const sequelize = new Sequelize( 'mysql://root:123456@localhost:3307/db_cyber_community');
+const sequelize = new Sequelize( 'mysql://root:123456@localhost:3307/db_cyber_community', {
+    logging: false, // Tắt logging để không hiển thị các truy vấn SQL trong console
+});
 // Kiểm tra kết nối
 try {
     await sequelize.authenticate();
-    console.log('Kết nối đến cơ sở dữ liệu MySQL bằng Sequelize thành công!');    
+    console.log('sequelize: Kết nối đến cơ sở dữ liệu MySQL bằng Sequelize thành công!');    
 } catch (error) {
-    console.log(error, 'Kết nối đến cơ sở dữ liệu MySQL bằng Sequelize khó tạo!');         
+    console.log(error, 'sequelize: Kết nối đến cơ sở dữ liệu MySQL bằng Sequelize khó tạo!');         
 }
+
+// Lấy dữ liệu từ bảng Roles bằng Sequelize
+// code frist tạo model Roles
+const Roles = sequelize.define('Roles', // Định nghĩa model Roles
+    {
+    // Tạo một model bằng Sequelize
+    // Định nghĩa các trường dữ liệu trong bảng Roles
+    id: {
+      type: Sequelize.INTEGER,
+      // Định nghĩa trường id là kiểu INTEGER
+      primaryKey: true,
+      // Đặt id là khóa chính
+      // Tự động tăng giá trị id bằng cơ sở dữ liệu MySQL
+      autoIncrement: true,
+    },
+    name: {
+      type: Sequelize.STRING,//
+        // Định nghĩa trường name là kiểu STRING
+        
+      allowNull: false,
+        // Không cho phép trường name là null
+    },
+    description: {
+      type: Sequelize.STRING,
+      // Định nghĩa trường description là kiểu STRING
+      allowNull: true,
+      // Cho phép trường description là null
+    },
+    ísActive: {
+      type: Sequelize.BOOLEAN,
+      // Định nghĩa trường isActive là kiểu BOOLEAN
+      allowNull: false,
+      // Không cho phép trường isActive là null
+      defaultValue: true,
+      // Đặt giá trị mặc định của trường isActive là true
+    },
+    deletedBy: {
+      type: Sequelize.INTEGER,
+      // Định nghĩa trường deletedBy là kiểu INTEGER
+      allowNull: false,
+      // Cho phép trường deletedBy là null
+    },
+    isDeleted: {
+      type: Sequelize.BOOLEAN,
+      // Định nghĩa trường isDeleted là kiểu BOOLEAN
+      allowNull: false,
+      // Cho phép trường deletedAt là null
+    },
+    deletedAt: {
+      type: "TIMESTAMP",
+      // Định nghĩa trường deletedAt là kiểu TIMESTAMP
+      allowNull: true,
+      // Cho phép trường deletedAt là null
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    },
+        // Đặt giá trị mặc định của trường deletedAt là thời gian hiện tại
+    createdAt: {
+      type: "TIMESTAMP",
+      // Định nghĩa trường createdAt là kiểu TIMESTAMP
+      allowNull: true,
+      // Cho phép trường createdAt là null
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    },
+    updatedAt: {
+      type: "TIMESTAMP",
+      // Định nghĩa trường updatedAt là kiểu TIMESTAMP
+      allowNull: true,
+      // Cho phép trường updatedAt là null
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    },
+
+  },
+  {
+    // Định nghĩa bảng Roles
+    tableName: 'Roles',
+    // Tên bảng trong cơ sở dữ liệu MySQL
+    timestamps: false,// Tắt tính năng tự động tạo trường createdAt và updatedAt
+    // Tắt tính năng tự động tạo trường createdAt và updatedAt
+    // Cho phép trường createdAt và updatedAt
+  } 
+);
+
+// Đồng bộ hóa mô hình với cơ sở dữ liệu MySQL
+Roles.sync()
+  // Sử dụng async/await để lấy dữ liệu từ cơ sở dữ liệu MySQL bằng Sequelize
+  // Sử dụng sequelize.query() để thực hiện truy vấn    
+
+
+  //database first dùngg sequelize-auto
+  //sequelize-auto -h <host> -d <database> -u <user> -x [password] -p [port]  --dialect [dialect] -c [/path/to/config] -o [/path/to/models] -t [tableName]
+
 
 app.get("/Sequelize", async (req, res) => {
     // Lấy dữ liệu từ bảng Roles bằng Sequelize
@@ -109,6 +203,6 @@ app.listen(3069, () => {
  * nodemon: dùng để tạo server cốt lỗi  trên API https://www.npmjs.com/package/nodemon
  * MySQL2: dùng để tương tác với db bằng  câu lệnh SQl trên cơ sở dữ liệu MySQL https://www.npmjs.com/package/mysql2
  * sequelize: Dùng để tương tác với db bằng ORM (object relational mapping) hay hàm function trên cơ sở dữ liệu MySQL https://sequelize.org
- * 
+ * sequelize-auto: Dùng để tạo mô hình với cơ sở dữ liệu MySQL còn gọi Database First https://github.com/sequelize/sequelize-auto
  * 
  */
