@@ -1,6 +1,11 @@
 import express from "express";
+// Import express for creating the server and handling requests
 
 import mysql from 'mysql2/promise';
+// Import mysql2/promise for async/await support
+
+import { Sequelize } from 'sequelize';
+// Import Sequelize for ORM support
 
 
 
@@ -71,7 +76,36 @@ app.get("/MySQL2", async (req, res) => {
 });
 
 
+// Kết nối đến cơ sở dữ liệu MySQL bằng Sequelize
+const sequelize = new Sequelize( 'mysql://root:123456@localhost:3307/db_cyber_community');
+// Kiểm tra kết nối
+try {
+    await sequelize.authenticate();
+    console.log('Kết nối đến cơ sở dữ liệu MySQL bằng Sequelize thành công!');    
+} catch (error) {
+    console.log(error);         
+}
 
+app.get("/Sequelize", async (req, res) => {
+    // Lấy dữ liệu từ bảng Roles bằng Sequelize
+    const listRoles = await sequelize.query('SELECT * FROM `Roles`');    
+    res.json(listRoles);
+})
+
+
+// Tạo server 
+// Sử dụng app.listen() để tạo server và lắng nghe các yêu cầu từ clien
 app.listen(3069, () => {
-    console.log("Server is running on port 3000");
+    console.log("Server is running on port 3069");
 });
+
+
+/**
+ * Các thư viện dùng
+ * Epress: Cốt lỗi xây dưng API (Application Programming Interface) trên server với tương tác giữa client và server https://expressjs.com/
+ * nodemon: dùng để tạo server cốt lỗi  trên API https://www.npmjs.com/package/nodemon
+ * MySQL2: dùng để tương tác với db bằng  câu lệnh SQl trên cơ sở dữ liệu MySQL https://www.npmjs.com/package/mysql2
+ * sequelize: Dùng để tương tác với db bằng ORM (object relational mapping) hay hàm function trên cơ sở dữ liệu MySQL https://sequelize.org
+ * 
+ * 
+ */
