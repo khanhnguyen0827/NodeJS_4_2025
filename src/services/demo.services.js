@@ -2,22 +2,26 @@ const demoService = {
 
     HelloWorld: (req, res) => {
         const message = "Hello, World!";
-    res.json({ message });
-},
+    return message;},
+
     query: (req, res) => {
     const query = req.query;
-    res.json(query);},
+    return  query;},
+
     params: (req, res) => {
     const params = req.params;
-    res.json(params);},
+    return params;},
+
     headers: (req, res) => {
     const headers = req.headers;
-    res.json(headers);},
+    return headers;},
+
     body: (req, res) => {
     const body = req.body;
     console.log(body);
-    res.json(body);     
+    return body;     
     }
+
 
 };
 export default demoService
