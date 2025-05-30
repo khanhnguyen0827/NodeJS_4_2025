@@ -1,5 +1,7 @@
 
+import responseSeccess from "../common/helpers/response.helper.js";
 import demoService from "../services/demo.services.js";
+
 
 const demoController = {
     hello: (req, res) => {
@@ -32,13 +34,25 @@ const demoController = {
     // For example, you can add a method to handle PUT or DELETE requests
     mysql2:async (req, res) => {
         const result = await demoService.mysql2(res);
-        res.status(200).json(result);
+
+        const resdata = responseSeccess(result, `Gọi API Mysql thanh cong`, 200, `Success`);
+
+        res.status(resdata.statusCode).json(resdata);
+        // trả về dữ liệu dưới dạng JSON
+        //.status(200) trả về trạng thái 200
+        //json(resdata) trả về dữ liệu dưới dạng JSON
     } ,
+
+
+
+
+
     sequelize: async (req, res) => {
         // This method handles GET requests to fetch data using Sequelize ORM
         const result = await demoService.sequelize();
         // Call the service method to get the data
-        res.status(200).json(result);
+        const resdata = responseSeccess(result, `Gọi API Sequelize thanh cong`, 200, `Success`);
+        res.status(resdata.statusCode).json(resdata);
     }   
 
 
