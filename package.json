@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "express": "^5.1.0",
+    "express": "^4.21.2",
     "extensionless": "^1.9.9",
     "mysql2": "^3.14.1",
     "nodemo": "^1.0.0",

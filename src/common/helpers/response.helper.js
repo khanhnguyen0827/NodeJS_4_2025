@@ -1,7 +1,7 @@
 
 
 
-const responseSeccess = (data = null, message = `ok`,statusCode = 200, status = `Success`, doc=null)=>{
+export const responseSeccess = (data = null, message = `ok`,statusCode = 200, status = `Success`, doc=null)=>{
 
    return  {
             // theo nguyên tắc resful
@@ -14,8 +14,8 @@ const responseSeccess = (data = null, message = `ok`,statusCode = 200, status = 
             message: message,
             data: data,
             doc: doc,
-        }
+        };
 
-};
+}
 
-export default responseSeccess;
+

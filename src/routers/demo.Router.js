@@ -1,6 +1,6 @@
 import express from 'express';
 
-import demoController from '../cotrollers/demo.controller.js';
+import demoController from '../controllers/demo.controller.js';
 
 const DemoRouter = express.Router();
 
@@ -12,6 +12,9 @@ DemoRouter.get('/headers', demoController.headers);
 DemoRouter.post('/body', demoController.body);
 
 DemoRouter.get('/mysql2', demoController.mysql2);
+
+//middleware
+
 DemoRouter.get('/sequelize', demoController.sequelize);
 
 
