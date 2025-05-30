@@ -27,11 +27,30 @@ const demoController = {
         // This method handles POST requests with request body
         const result = await demoService.body(req, res);
         res.status(200).json(result);
-    },  
+    }, 
+    // You can add more methods here for other routes
+    // For example, you can add a method to handle PUT or DELETE requests
+    mysql2:async (req, res) => {
+        const result = await demoService.mysql2(res);
+        res.status(200).json(result);
+    } ,
+    sequelize: async (req, res) => {
+        // This method handles GET requests to fetch data using Sequelize ORM
+        const result = await demoService.sequelize();
+        // Call the service method to get the data
+        res.status(200).json(result);
+    }   
 
 
 };
 
 export default demoController;
+
+
+
+
+
+
+
 
 

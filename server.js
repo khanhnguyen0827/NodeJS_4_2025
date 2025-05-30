@@ -31,24 +31,7 @@ app.use("/", rootRouter);
 
 
 
-app.get("/MySQL2", async (req, res) => {
 
-    // For pool initialization, see above
-    // lấy dữ liệu bằng cơ sở dữ liệu MySQL
-    // Sử dụng async/await để lấy dữ liệu từ cơ sở dữ liệu MySQL
-    // Sử dụng pool.query() để thực hiện truy vấn
-    // Lấy dữ liệu từ bảng Roles
-//     const listRows = await pool.query('SELECT * FROM `Roles`');
-//    console.log(listRows);
-
-    const [ rows, fields] = await pool.query('SELECT * FROM `Roles`');
-    // Trả về dữ liệu dưới dạng JSON
-    //rows là mảng các đối tượng, mỗi đối tượng là một hàng dữ liệu trong bảng Roles
-    //fields là mảng các trường dữ liệu trong bảng Roles
-
-    res.json(rows || []); // Trả về dữ liệu dưới dạng JSON, nếu không có dữ liệu thì trả về mảng rỗng
-    // res.json(fields || []); // Trả về dữ liệu dưới dạng JSON, nếu không có dữ liệu thì trả về mảng rỗng
-});
 
 
 
@@ -61,19 +44,8 @@ app.get("/MySQL2", async (req, res) => {
   //sequelize-auto -h localhost -d db_cyber_community -u root -x 123456 -p 3307  --dialect mysql -o ./models -l esm -a ./additional.json
 
  
-const models = initModels(sequelize);
 
-//sư dụng orm để thực hiện truy vấn
-app.get("/sequelize", async (req, res,next) => {
-    // Lấy dữ liệu từ bảng Roles bằng Sequelize
-    const listRoles1 = await Roles.findAll();
-    const listRoles2 = await models.Roles.findAll();
-    const result = {
-      "model tự tạo sử dụng sequelize": listRoles1, 
-      "model tự tạo sử dụng sequelize-auto": listRoles2,
-    }
-    res.json(result);
-})
+
 
 
 // Tạo server 
