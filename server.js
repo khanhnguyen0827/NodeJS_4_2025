@@ -1,13 +1,21 @@
 import express from "express";
 // Import express for creating the server and handling requests
 
-import mysql from 'mysql2/promise';
-// Import mysql2/promise for async/await support
+import sequelize from "./src/common/sequelize/init.sequelize.js";
+// Import sequelize for ORM support and database connection
+import Roles from "./src/common/sequelize/model.sequelize.js";  
 
-import { Sequelize, DataTypes } from 'sequelize';
+
+
 import initModels from "./src/models/init-models";
 import rootRouter from "./src/routers/root.Router";
 // Import Sequelize for ORM support
+
+import pool from "./src/common/mysql2/init.mysql.js";
+// Import pool for MySQL connection pooling 
+
+import rootRouter from "./src/routers/root.router.js";
+// Import rootRouter for handling routes
 
 
 
@@ -158,19 +166,8 @@ Roles.sync()
   //sequelize-auto -h localhost -d db_cyber_community -u root -x 123456 -p 3307  --dialect mysql -o ./models -l esm -a ./additional.json
 
  
-const models = initModels(sequelize);
 
-//sư dụng orm để thực hiện truy vấn
-app.get("/sequelize", async (req, res,next) => {
-    // Lấy dữ liệu từ bảng Roles bằng Sequelize
-    const listRoles1 = await Roles.findAll();
-    const listRoles2 = await models.Roles.findAll();
-    const result = {
-      "model tự tạo sử dụng sequelize": listRoles1, 
-      "model tự tạo sử dụng sequelize-auto": listRoles2,
-    }
-    res.json(result);
-})
+
 
 
 // Tạo server 
