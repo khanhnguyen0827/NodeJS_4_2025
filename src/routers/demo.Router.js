@@ -1,34 +1,20 @@
-import express from "express";
-import demoController from "../controllers/demo.controller";
+import express from 'express';
 
-const demoRouter = express.Router();// Khoi tao router
+import demoController from '../cotrollers/demo.controller.js';
 
-demoRouter.get("/", demoController.HelloWorld);
+const DemoRouter = express.Router();
 
-//4 cách lấy dư liệu
-//1 cách lấy dư liệu bằng req.query
-demoRouter.get("/query", (req, res) => {
-    const query = req.query;
-    res.json(query);
-});
 
-//2 cách lấy dư liệu bằng req.params
-demoRouter.get("/params/:id", (req, res) => {
-    const params = req.params;
-    res.json(params);
-});
-//3 cách lấy dư liệu bằng req.HEADERS
-//tHƯỜNG DÙNG ĐỂ TRUYỀN THÔNG TIN BằNG HEADERS
-demoRouter.get("/headers", (req, res) => {
-    const headers = req.headers;
-    res.json(headers);
-});
+DemoRouter.get('/', demoController.hello);
+DemoRouter.get('/query', demoController.query);
+DemoRouter.get('/params/:id', demoController.params);
+DemoRouter.get('/headers', demoController.headers);
+DemoRouter.post('/body', demoController.body);
 
-//3 cách lấy dư liệu bằng req.body
-demoRouter.post("/body", (req, res) => {
-    const body = req.body;
-    console.log(body);
-    res.json(body);
-});
+DemoRouter.get('/mysql2', demoController.mysql2);
+DemoRouter.get('/sequelize', demoController.sequelize);
 
-export default demoRouter;
+
+export default DemoRouter;
+
+

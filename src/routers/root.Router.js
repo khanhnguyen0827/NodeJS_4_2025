@@ -1,10 +1,8 @@
-import expess from 'express';
+import express from 'express';
 
-import demoRouter from './demo.Router.js';
+import DemoRouter from './demo.router.js';
+const rootRouter = express.Router();
 
-const rootRouter = expess.Router();
-
-
-rootRouter.use('/demo', demoRouter);
+rootRouter.use('/demo', DemoRouter);
 
 export default rootRouter;
