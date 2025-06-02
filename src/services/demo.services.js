@@ -6,6 +6,8 @@ import initModels from '../models/init-models.js';
 // Import Sequelize for ORM support
 import sequelize from '../common/sequelize/init.sequelize.js';
 
+import {BadrequestException} from '../common/helpers/exception.helper.js';
+
 const demoService = {
 
     HelloWorld: (req, res) => {
@@ -43,6 +45,24 @@ const demoService = {
 
   
     sequelize: async () => {
+
+        //lỗi kiểm soát đc
+   
+        //console.log(abc);
+
+
+        // lỗi ko kiểm soát đc
+        const a =6
+       
+        const b = 5;
+
+        if (a !== b) {
+           
+            throw new BadrequestException("lỗi kiểm soát");// trả lỗi
+        //throw new Error("lỗi không kiểm soát"); // trả lỗi
+        }
+
+
         const models = initModels(sequelize);
         // Lấy dữ liệu từ bảng Roles bằng Sequelize
         const listRoles1 = await Roles.findAll();

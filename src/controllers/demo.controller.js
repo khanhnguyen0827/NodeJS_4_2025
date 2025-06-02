@@ -42,12 +42,27 @@ const demoController = {
         //.status(200) trả về trạng thái 200
         //json(resdata) trả về dữ liệu dưới dạng JSON
     } ,
-    sequelize: async (req, res) => {
-        // This method handles GET requests to fetch data using Sequelize ORM
+    sequelize: async (req, res, next) => {
+
+      
+        // const result = await demoService.sequelize();
+        // // // Call the service method to get the data
+        // const resdata = responseSeccess(result, `Gọi API Sequelize thanh cong`, 200, `Success`);
+        //  res.status(resdata.statusCode).json(resdata);
+
+        try {
+             // This method handles GET requests to fetch data using Sequelize ORM
         const result = await demoService.sequelize();
         // Call the service method to get the data
         const resdata = responseSeccess(result, `Gọi API Sequelize thanh cong`, 200, `Success`);
         res.status(resdata.statusCode).json(resdata);
+            
+        } catch (error) {
+            console.error("Error in sequelize method:", error);
+            next(error); // Pass the error to the next middleware for handling
+        }
+
+       
     }   
 
 

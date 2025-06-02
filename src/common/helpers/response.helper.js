@@ -19,3 +19,14 @@ export const responseSeccess = (data = null, message = `ok`,statusCode = 200, st
 }
 
 
+export const responseError = (message = `internal server error`, statusCode = 500,stack = null ,status = `Error`, doc = null) => {
+    return {
+        statusCode: statusCode,
+        status: status,
+        message: message,
+        stack: stack,
+        doc: doc,
+    };
+};
+
+

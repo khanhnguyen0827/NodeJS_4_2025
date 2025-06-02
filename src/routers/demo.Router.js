@@ -18,9 +18,19 @@ DemoRouter.get('/mysql2', demoController.mysql2);
 //middleware
 
 DemoRouter.get('/sequelize',
-    (req, res, next)=>{console.log(`Middleware 1`);next()},
-    (req, res, next)=>{if (true){next()}else{res.json(`không hợp lệ`)}}, 
-    (req, res, next)=>{console.log(`Middleware 3`)} ,
+    (req, res, next)=>{
+        const middleware1 = {
+            name: 'Middleware 1',
+            description: 'This is the first middleware',
+            version: '1.0.0'    
+        };
+        req.middleware1 = middleware1;
+        console.log(`Middleware 1`);next()},
+    (req, res, next)=>{
+        
+        console.log(req.middleware1); 
+        next();}, 
+    
     demoController.sequelize);
 
 
