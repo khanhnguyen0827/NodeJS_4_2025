@@ -50,6 +50,7 @@ const demoController = {
         // const resdata = responseSeccess(result, `Gọi API Sequelize thanh cong`, 200, `Success`);
         //  res.status(resdata.statusCode).json(resdata);
 
+        //cách tránh lỗi đối với epress phiên bản dưới 5.0
         try {
              // This method handles GET requests to fetch data using Sequelize ORM
         const result = await demoService.sequelize();

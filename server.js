@@ -30,6 +30,14 @@ app.listen(3069, () => {
 
 
 /**
+ * quang trong
+ * phiên bản epress 5.0.0 trở lên thì ko cần try/catch để xử lý lỗi
+ * phien ban 4.0.0 truoc thi phai try/catch
+ * để tránh rới hết sever
+ */
+
+
+/**
  * Các thư viện dùng
  * Epress: Cốt lỗi xây dưng API (Application Programming Interface) trên server với tương tác giữa client và server https://expressjs.com/
  * nodemon: dùng để tạo server cốt lỗi  trên API https://www.npmjs.com/package/nodemon

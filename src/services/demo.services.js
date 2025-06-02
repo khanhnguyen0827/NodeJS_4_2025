@@ -33,6 +33,11 @@ const demoService = {
     },
 
     mysql2: async() => {
+
+            //console.log(abc);
+            //lỗi app crashed - waiting for file changes before starting...: rới sever
+            //const a =6
+
          const [ rows, fields] = await pool.query('SELECT * FROM `Roles`');
     // Trả về dữ liệu dưới dạng JSON
     //rows là mảng các đối tượng, mỗi đối tượng là một hàng dữ liệu trong bảng Roles
