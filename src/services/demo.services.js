@@ -51,7 +51,7 @@ const demoService = {
         //console.log(abc);
 
 
-        // lỗi ko kiểm soát đc
+        //lỗi ko kiểm soát đc
         const a =6
        
         const b = 5;
