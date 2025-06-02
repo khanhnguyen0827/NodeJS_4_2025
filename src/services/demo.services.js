@@ -57,15 +57,15 @@ const demoService = {
 
 
         //lỗi ko kiểm soát đc
-        const a =6
+        // const a =6
        
-        const b = 5;
+        // const b = 5;
 
-        if (a !== b) {
+        // if (a !== b) {
            
-            throw new BadrequestException("lỗi kiểm soát");// trả lỗi
-        //throw new Error("lỗi không kiểm soát"); // trả lỗi
-        }
+        //     throw new BadrequestException("lỗi kiểm soát");// trả lỗi
+        // //throw new Error("lỗi không kiểm soát"); // trả lỗi
+        // }
 
 
         const models = initModels(sequelize);

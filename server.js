@@ -5,6 +5,8 @@ import rootRouter from "./src/routers/root.Router";
 import { handleErr } from "./src/common/helpers/handle-err.helper";
 // Import Sequelize for ORM support
 
+import logAPI from "./src/common/morgan/init.morgan.js";
+
 
 
 
@@ -13,6 +15,8 @@ import { handleErr } from "./src/common/helpers/handle-err.helper";
 const app = express();
 
 app.use(express.json());//Chuyển dạng json sang đối tượng js trên req.body
+
+app.use(logAPI);//thư viện log api (morgan + chalk)
 
 app.use("/",rootRouter);// Khoi tao router
 
@@ -45,4 +49,6 @@ app.listen(3069, () => {
  * sequelize: Dùng để tương tác với db bằng ORM (object relational mapping) hay hàm function trên cơ sở dữ liệu MySQL https://sequelize.org
  * sequelize-auto: Dùng để tạo mô hình với cơ sở dữ liệu MySQL còn gọi Database First https://github.com/sequelize/sequelize-auto
  * extensionless: giúp import file mà ko cần thêm duôi js
+ * morgan giúp show log trên terminal
+ * chalk: giúp màu câu lệnh trên terminal
  */

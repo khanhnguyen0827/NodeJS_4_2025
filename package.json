@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "chalk": "^5.4.1",
     "express": "^5.1.0",
     "extensionless": "^1.9.9",
     "morgan": "^1.10.0",
