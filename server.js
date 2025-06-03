@@ -79,7 +79,3 @@ app.listen(3069, () => {
  * 
  */
 
-
-/**
- * phân trang (pagination)
- */
