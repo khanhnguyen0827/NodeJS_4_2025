@@ -1,10 +1,12 @@
-import e from "express";
+
 import prisma from "../common/prisma/init.prisma.js";
 // Import Prisma client to interact with the database
 
 const articlesService = {
-    getAll: async () => {
-        return await prisma.articles.findMany();
+    getAll:  async(req) => {
+        // This method retrieves all articles from the database
+        const listArticles = await prisma.articles.findMany();
+        return listArticles ;
     }
 };
 
