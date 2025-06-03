@@ -12,6 +12,9 @@ import logAPI from "./src/common/morgan/init.morgan.js";
 
 
 
+
+
+
 const app = express();
 
 app.use(express.json());//Chuyển dạng json sang đối tượng js trên req.body
@@ -51,4 +54,18 @@ app.listen(3069, () => {
  * extensionless: giúp import file mà ko cần thêm duôi js
  * morgan giúp show log trên terminal
  * chalk: giúp màu câu lệnh trên terminal
+ * dotenv: giúp quản lý biến môi trường trong file .env
+ * prisma: Dùng để tương tác với db bằng ORM (object relational mapping) hay hàm function trên cơ sở dữ liệu MySQL https://www.prisma.io/
+ *  - B1:    npm i prisma : dung để cài đặt Prisma
+ *  - B2:    npx prisma init   : dung để khởi tạo cấu trúc thư mục và file cấu hình của Prisma.
+ *  - B3:     + cấu hình file .env với DATABASE_URL="mysql://root:password@localhost:3306/db_name"
+ * *          + cấu hình file prisma/schema.prisma với
+ * *                    generator client { provider = "prisma-client-js"}// Tạo ra các mô hình dựa trên cơ sở dữ liệu đã đồng bộ hóa
+ * *                    datasource db {provider = "mysql"  // Cơ sở dữ liệu cơ bản Hoặc postgresql, sqlite, sqlserver
+ * *                                    url      = env("DATABASE_URL")}// Cơ sở dữ liệu cơ bản Hoặc postgresql, sqlite, sqlserver
+ *  - B4:    npx prisma db pull :dung để đồng bộ hóa cơ sở dữ liệu với Prisma schema
+ *  - B5:    npx prisma generate :dung để tạo ra các mô hình dựa trên cơ sở dữ liệu đã đồng bộ hóa
+ * 
+ * 
+ * 
  */
