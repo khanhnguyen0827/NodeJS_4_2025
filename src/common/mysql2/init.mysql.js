@@ -1,9 +1,10 @@
 import mysql from 'mysql2/promise';
+
+import { URL_DATABASE } from '../constant/app.constant.js'; // Import URL_DATABASE from config.js
 // Import mysql2/promise for async/await support
 
-const URL_DATABASE = 'mysql://root:081297@localhost:3307/db_cyber_community';
 
-// Kết nối đến cơ sở dữ liệu MySQL
+ // Kết nối đến cơ sở dữ liệu MySQL
 // Sử dụng mysql2/promise để hỗ trợ async/await trên cơ sở dữ liệu MySQL
 const pool = mysql.createPool({
   uri: URL_DATABASE,});

@@ -1,6 +1,8 @@
 import { Sequelize, DataTypes } from 'sequelize';
 
-const URL_DATABASE = 'mysql://root:081297@localhost:3307/db_cyber_community';
+import { URL_DATABASE } from '../constant/app.constant.js';
+
+
 
 
 // Kết nối đến cơ sở dữ liệu MySQL bằng Sequelize
