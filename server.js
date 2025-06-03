@@ -7,7 +7,7 @@ import { handleErr } from "./src/common/helpers/handle-err.helper";
 
 import logAPI from "./src/common/morgan/init.morgan.js";
 
-
+import cors from "cors";
 
 
 
@@ -21,7 +21,13 @@ app.use(express.json());//Chuyển dạng json sang đối tượng js trên req
 
 app.use(logAPI);//thư viện log api (morgan + chalk)
 
+app.use(cors({ origin: ["http://localhost:3000","http://localhost:3001"] }));
+    
+
+
 app.use("/",rootRouter);// Khoi tao router
+
+
 
 
 
@@ -67,5 +73,13 @@ app.listen(3069, () => {
  *  - B5:    npx prisma generate :dung để tạo ra các mô hình dựa trên cơ sở dữ liệu đã đồng bộ hóa
  * 
  * 
+ * CORS: dùng để phân quyen tương tác giữa client và server : https://www.npmjs.com/package/cors
+ * b1 cài đặt: npm i cors
+ * b2 dùng: app.use(cors())
  * 
+ */
+
+
+/**
+ * phân trang (pagination)
  */

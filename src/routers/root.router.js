@@ -5,7 +5,7 @@ import acticlesRouter from './articles.router.js';
 const rootRouter = express.Router();
 
 rootRouter.use('/demo', DemoRouter);
-rootRouter.use('/Articles', acticlesRouter);
+rootRouter.use('/article', acticlesRouter);
 
 
 
