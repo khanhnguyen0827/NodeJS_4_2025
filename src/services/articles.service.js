@@ -23,7 +23,7 @@ const articlesService = {
 
         const listArticles = await prisma.articles.findMany({
             orderBy: { // Sort the articles by createdAt in descending order
-                createdAt: 'desc',
+                createdAt: 'asc',
             },
             skip: offset,
             take: pageSize
