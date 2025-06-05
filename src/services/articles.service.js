@@ -26,10 +26,17 @@ const articlesService = {
                 createdAt: 'asc',
             },
             skip: offset,
-            take: pageSize
+            take: pageSize,
+            where: {
+                // Filter to only include active articles
+                views: 8, // Example filter condition
+                content: {
+                    contains: 'sql', // Example filter condition
+                },
+            }
         });
 
-        const totalItems = await prisma.articles.count();
+        const totalItems = listArticles.length; // Get the total number of articles
 
         return {
             page: page, //số trang hien tai
