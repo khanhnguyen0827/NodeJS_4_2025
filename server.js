@@ -77,5 +77,6 @@ app.listen(3069, () => {
  * b1 cài đặt: npm i cors
  * b2 dùng: app.use(cors())
  * 
+ * bcrypt : dùng để mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu https://www.npmjs.com/package/bcrypt
  */
 
