@@ -45,7 +45,47 @@ const authService = {
     delete usernew.password; // Xóa mật khẩu khỏi đối tượng người dùng
    
     return usernew;
-  } 
-  }
+  } ,
+   login: async (req) => {
+    const { email, password } = req.body;
+    // Tìm kiếm người dùng theo email
+    const user = await prisma.users.findUnique({
+      where: {
+        email: email,
+      },
+    });
 
+    // Kiểm tra xem người dùng có tồn tại hay không
+    if (!user) {
+      throw new BadrequestException(`Email không tồn tại`);
+    }
+
+    // So sánh mật khẩu đã nhập với mật khẩu đã mã hóa trong cơ sở dữ liệu
+    const isPasswordValid = bcrypt.compareSync(password, user.password);
+    
+    if (!isPasswordValid) {
+      throw new BadrequestException(`Mật khẩu không đúng`);
+    }
+
+  
+    // token của người dùng  có thể được tạo ra ở đây nếu cần acss token hoaặc refresh token
+    const tokens = {
+      access_token: "token",
+      refresh_token: "refresh_token",
+    };
+    //
+
+    return tokens;    
+  },
+  logout: async (req) => {
+    // Xử lý đăng xuất người dùng
+
+    // Trong trường hợp này, không có logic cụ thể cho đăng xuất
+    // Bạn có thể xóa token hoặc thực hiện các hành động khác nếu cần
+
+    return { message: "Đăng xuất thành công" };
+  },
+
+
+}
   export default authService
