@@ -1,23 +1,13 @@
 
 const authService = {
-  isAuthenticated: false,
-  login: (req, res) => {
     // Logic for user login
     // For example, check credentials and set isAuthenticated to true
-    authService.isAuthenticated = true;
-    res.send("User logged in successfully");
-  },
-  logout: (req, res) => {
-    // Logic for user logout
-    // For example, reset isAuthenticated to false
-    authService.isAuthenticated = false;
-    res.send("User logged out successfully");    
-  },
-  register: (req, res) => {
-    // Logic for user registration
-    // For example, save user details to the database
-    res.send("User registered successfully");
-  } ,
+   
+  register: (req) => {
+    console.log("Registering user with data:");
+   
+    return `kết quả đăng ký thành công`;
+  } 
   }
 
   export default authService

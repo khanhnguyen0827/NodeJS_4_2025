@@ -1,7 +1,7 @@
 import express from "express";
 // Import express for creating the server and handling requests
 
-import rootRouter from "./src/routers/root.Router";
+import rootRouter from "./src/routers/root.router.js";
 import { handleErr } from "./src/common/helpers/handle-err.helper";
 // Import Sequelize for ORM support
 
