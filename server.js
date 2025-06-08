@@ -70,7 +70,7 @@ app.listen(3069, () => {
  * *                    datasource db {provider = "mysql"  // Cơ sở dữ liệu cơ bản Hoặc postgresql, sqlite, sqlserver
  * *                                    url      = env("DATABASE_URL")}// Cơ sở dữ liệu cơ bản Hoặc postgresql, sqlite, sqlserver
  *  - B4:    npx prisma db pull :dung để đồng bộ hóa cơ sở dữ liệu với Prisma schema
- *  - B5:    npx prisma generate :dung để tạo ra các mô hình dựa trên cơ sở dữ liệu đã đồng bộ hóa
+ *  - B5:    npx prisma generate :dung để tạo ra các mô hình dựa trên cơ sở dữ liệu đã đồng bộ npx hóa
  * 
  * 
  * CORS: dùng để phân quyen tương tác giữa client và server : https://www.npmjs.com/package/cors
