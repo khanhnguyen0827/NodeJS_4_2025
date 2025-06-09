@@ -7,3 +7,12 @@ export class BadrequestException extends Error {
       this.code = statusCodes.BAD_REQUEST;
    }
 }
+
+// export class UnauthorizedException extends Error {}
+
+export class UnauthorizedException extends Error {
+   constructor(message = "Unauthorized") {
+      super(message);//new Error(message);
+      this.code = statusCodes.UNAUTHORIZED;//401 logout
+   }
+}

@@ -15,6 +15,12 @@ const authController = {
         res.status(resData.statusCode).json(resData);
     },
 
+    getInfo: async (req, res) => {
+        const resutl = await authService.getInfo(req);
+        const resData = responseSeccess(resutl, "Get info successful", 200, "Success");
+        res.status(resData.statusCode).json(resData);
+    },
+
     logout: async (req, res) => {
         const resutl = await authService.logout(req);
         const resData = responseSeccess(resutl, "Logout successful", 200, "Success");

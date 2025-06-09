@@ -78,6 +78,10 @@ const authService = {
 
     return tokens;    
   },
+
+  getInfo: async (req) => {
+    return `getInfo`;
+  },
   logout: async (req) => {
     // Xử lý đăng xuất người dùng
 

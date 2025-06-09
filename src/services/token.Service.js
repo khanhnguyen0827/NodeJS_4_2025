@@ -10,11 +10,22 @@ const tokenService = {
         //expiresIn: thoi gian het han
         console.log(accessToken);
 
+        jwt.decode(accessToken);//giai ma
+
+        
+
         return {
             accessToken: accessToken,
             refreshToken: '123456789'
         };
     },
+
+    verifyAccessToken: (token) => {
+        jwt.verify(accessToken, ACCESS_TOKEN_SECRET);//giai ma
+        //tự throw lỗi
+        //jwt.decode(accessToken);//giai ma
+        
+    }
 
 
 };
@@ -22,4 +33,4 @@ const tokenService = {
 
 
 
-export default tokenService
+export default tokenService;
