@@ -1,6 +1,7 @@
 import prisma from "../common/prisma/init.prisma";
 import { BadrequestException } from "../common/helpers/exception.helper";
 import bcrypt from "bcrypt";
+import tokenService from "./token.Service";
 // import { statusCodes } from "../common/helpers/status-code.helper";  
 
 const authService = {
@@ -72,10 +73,7 @@ const authService = {
     // Trả về thông tin người dùng đã đăng nhập
 
     // token của người dùng  có thể được tạo ra ở đây nếu cần acss token || refresh token
-    const tokens = {
-      access_token: "acccess_token",
-      refresh_token: "refresh_token",
-    };
+    const tokens = tokenService.createTokens(user.id);
     //
 
     return tokens;    
