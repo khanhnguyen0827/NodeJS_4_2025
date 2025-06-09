@@ -78,5 +78,11 @@ app.listen(3069, () => {
  * b2 dùng: app.use(cors())
  * 
  * bcrypt : dùng để mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu https://www.npmjs.com/package/bcrypt
+ * 
+ * JWT: dùng để tạo token trên server với client https://www.npmjs.com/package/jsonwebtoken 
+ * thay thế xác minh 
+ * b1: npm i jsonwebtoken
+ * b2: tạo file .env với JWT_SECRET=abcdefghijklmnopqrstuvwxyz1234567890
+ * 
  */
 
