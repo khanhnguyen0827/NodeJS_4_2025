@@ -66,15 +66,14 @@ const authService = {
     if (!isPasswordValid) {
       throw new BadrequestException(`Mật khẩu không đúng`);
     }
-
     // Nếu đăng nhập thành công, trả về thông tin người dùng
     // Xóa mật khẩu khỏi đối tượng người dùng để không trả về mật khẩu
     delete user.password; // Xóa mật khẩu khỏi đối tượng người dùng
     // Trả về thông tin người dùng đã đăng nhập
-  
-    // token của người dùng  có thể được tạo ra ở đây nếu cần acss token hoaặc refresh token
+
+    // token của người dùng  có thể được tạo ra ở đây nếu cần acss token || refresh token
     const tokens = {
-      access_token: "token",
+      access_token: "acccess_token",
       refresh_token: "refresh_token",
     };
     //
