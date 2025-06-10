@@ -1,9 +1,15 @@
 
 
-/*************  ✨ Windsurf Command ⭐  *************/
 import { UnauthorizedException } from "../helpers/exception.helper";
-import tokenService from "../services/token.Service";
-/*******  a335a838-9f28-42b0-9f47-00538143a4c6  *******/
+import tokenService from "../../services/token.Service.js";
+/**
+ * Middleware to protect routes by checking for a valid JWT token in the request header.
+ * If the token is missing or invalid, it throws an UnauthorizedException.
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
+ */
 function protect(req, res, next) {
     //kiêm tra token trong request header
     const authHeader = req.headers?.authorization || "";

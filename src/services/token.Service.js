@@ -20,7 +20,7 @@ const tokenService = {
         };
     },
 
-    verifyAccessToken: (token) => {
+    verifyAccessToken: (accessToken) => {
         jwt.verify(accessToken, ACCESS_TOKEN_SECRET);//giai ma
         //tự throw lỗi
         //jwt.decode(accessToken);//giai ma
@@ -34,3 +34,4 @@ const tokenService = {
 
 
 export default tokenService;
+// const tokenService = {
