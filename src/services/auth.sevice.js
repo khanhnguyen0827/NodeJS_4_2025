@@ -98,9 +98,8 @@ const authService = {
     // Xử lý đăng nhập bằng Google
     // Trong trường hợp này, bạn có thể sử dụng thông tin từ Google để đăng nhập hoặc đăng ký người dùng    
     const { code } = req.body;
-  
-    
 
+    
     const oAuth2Client = new OAuth2Client(
       GOOGLE_CLIENT_ID,
       GOOGLE_CLIENT_SECRET,
@@ -112,13 +111,35 @@ const authService = {
     // keys có thể được lấy từ file JSON của Google OAuth2
     // Lấy token từ Google
     const  { tokens }  = await oAuth2Client.getToken(code);// Lấy token từ Google
-    
-
-    
     const decodedToken = jwt.decode(tokens.id_token);
-
 console.log("code", { code,id_token: tokens.id_token, decodedToken });
 
+    const { email, email_verified, name,picture } = decodedToken;
+    // Lấy thông tin người dùng từ Google
+    if (!email_verified) throw new BadrequestException("Email không được xác thực");
+
+    // Tìm kiếm người dùng theo email
+    const user = await prisma.users.findUnique({
+      where: {
+        email: email,
+      },
+    });
+
+    // Tạo người dùng trong cơ sở dữ liệu
+    if (!user) {
+      const usernew = await prisma.users.create({
+        data: {
+          fullName: name,
+          email: email,
+          avatar: picture,
+        },
+      });
+
+      return usernew;
+    }
+    
+    // Tìm kiếm người dùng theo email
+    
     //oAuth2Client.setCredentials(tokens);
     // Lấy thông tin người dùng từ Google
     return `Đăng nhập bằng Google thành công` ;
