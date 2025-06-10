@@ -110,40 +110,46 @@ const authService = {
     // keys là thông tin cấu hình OAuth2 từ Google
     // keys có thể được lấy từ file JSON của Google OAuth2
     // Lấy token từ Google
-    const  { tokens }  = await oAuth2Client.getToken(code);// Lấy token từ Google
-    const decodedToken = jwt.decode(tokens.id_token);
-console.log("code", { code,id_token: tokens.id_token, decodedToken });
+
+    //nếu qua dòng code nay thì google se dùng code de lay token
+    const  { tokens: tokensGoogle }  = await oAuth2Client.getToken(code);// Lấy token từ Google
+
+    const decodedToken = jwt.decode(tokensGoogle.id_token);
+//console.log("code", { code,id_token: tokensGoogle.id_token, decodedToken });
+
 
     const { email, email_verified, name,picture } = decodedToken;
     // Lấy thông tin người dùng từ Google
     if (!email_verified) throw new BadrequestException("Email không được xác thực");
 
     // Tìm kiếm người dùng theo email
-    const user = await prisma.users.findUnique({
+    let userExist = await prisma.users.findUnique({
       where: {
         email: email,
       },
     });
 
     // Tạo người dùng trong cơ sở dữ liệu
-    if (!user) {
-      const usernew = await prisma.users.create({
+    if (!userExist) {
+      userExist = await prisma.users.create({
         data: {
           fullName: name,
           email: email,
           avatar: picture,
         },
-      });
+      })
+    };
 
-      return usernew;
-    }
+      const tokens = tokenService.createTokens(userExist.id);
+
+
+      return tokens;
     
     // Tìm kiếm người dùng theo email
     
     //oAuth2Client.setCredentials(tokens);
     // Lấy thông tin người dùng từ Google
-    return `Đăng nhập bằng Google thành công` ;
-
+  
     // Tìm kiếm người dùng theo email
     
   },  

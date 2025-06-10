@@ -9,7 +9,7 @@ const authRouter = express.Router();
 authRouter.post("/register", authController.register);
 authRouter.post("/login", authController.login);
 authRouter.get("/get-info", process,authController.getInfo);
-authRouter.post("/google-login", authController.googleLogin);
+authRouter.post("/google-login",authController.googleLogin);
 
 
 authRouter.post("/logout", authController.logout);  
