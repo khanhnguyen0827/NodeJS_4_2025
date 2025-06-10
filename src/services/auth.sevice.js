@@ -131,6 +131,7 @@ const authService = {
 
     // Tạo người dùng trong cơ sở dữ liệu
     if (!userExist) {
+      
       userExist = await prisma.users.create({
         data: {
           fullName: name,
