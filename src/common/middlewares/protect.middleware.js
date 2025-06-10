@@ -2,6 +2,7 @@
 
 import { UnauthorizedException } from "../helpers/exception.helper";
 import tokenService from "../../services/token.Service.js";
+import prisma from "../prisma/init.prisma.js";
 /**
  * Middleware to protect routes by checking for a valid JWT token in the request header.
  * If the token is missing or invalid, it throws an UnauthorizedException.
@@ -10,7 +11,7 @@ import tokenService from "../../services/token.Service.js";
  * @param {Object} res - The response object.
  * @param {Function} next - The next middleware function.
  */
-function protect(req, res, next) {
+ const protect = async  (req, res, next)=> {
     //kiêm tra token trong request header
     const authHeader = req.headers?.authorization || "";
     const [type, token] = authHeader.split(" ");
@@ -25,15 +26,26 @@ function protect(req, res, next) {
     }
 
     //kiem tra token có hợp le hay khong
-    const payload = tokenService.verifyAccessToken(token);
+    const decode = tokenService.verifyAccessToken(token);
+
+    const user = await prisma.users.findUnique({
+        where: {
+            id: decode.userID
+        }
+    })
+
+
+    req.user = user; //gán user vào request để sử dụng trong các middleware hoặc route handler sau này
+    if (!user) {
+        throw new UnauthorizedException("User not found");
+    }
 
 
 
     console.log({
-        authHeader,
         type,
         token,
-        payload
+        decode
     });
 
     //bearer+ ' ' + token

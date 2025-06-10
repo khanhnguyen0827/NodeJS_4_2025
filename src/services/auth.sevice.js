@@ -2,6 +2,9 @@ import prisma from "../common/prisma/init.prisma";
 import { BadrequestException } from "../common/helpers/exception.helper";
 import bcrypt from "bcrypt";
 import tokenService from "./token.Service";
+import { OAuth2Client } from "google-auth-library";
+import {GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET} from "../common/constant/app.constant";
+import jwt from "jsonwebtoken"; // Import JWT for decoding tokens
 // import { statusCodes } from "../common/helpers/status-code.helper";  
 
 const authService = {
@@ -80,8 +83,49 @@ const authService = {
   },
 
   getInfo: async (req) => {
-    return `getInfo`;
+    // Lấy thông tin người dùng từ request  
+    const user = req.user; // Người dùng đã được xác thực trong middleware
+    if (!user) {
+      throw new BadrequestException("Người dùng không tồn tại");
+    }
+    // Xóa mật khẩu khỏi đối tượng người dùng để không trả về mật khẩu
+    delete user.password; // Xóa mật khẩu khỏi đối tượng người dùng
+    // Trả về thông tin người dùng
+    return user; // Trả về thông tin người dùng
   },
+
+  googleLogin: async (req) => {
+    // Xử lý đăng nhập bằng Google
+    // Trong trường hợp này, bạn có thể sử dụng thông tin từ Google để đăng nhập hoặc đăng ký người dùng    
+    const { code } = req.body;
+  
+    
+
+    const oAuth2Client = new OAuth2Client(
+      GOOGLE_CLIENT_ID,
+      GOOGLE_CLIENT_SECRET,
+      'postmessage' 
+    );
+    // 'postmessage' là redirect URI, bạn có thể thay đổi tùy theo cấu hình của bạn
+    
+    // keys là thông tin cấu hình OAuth2 từ Google
+    // keys có thể được lấy từ file JSON của Google OAuth2
+    // Lấy token từ Google
+    const  { tokens }  = await oAuth2Client.getToken(code);// Lấy token từ Google
+    
+
+    
+    const decodedToken = jwt.decode(tokens.id_token);
+
+console.log("code", { code,id_token: tokens.id_token, decodedToken });
+
+    //oAuth2Client.setCredentials(tokens);
+    // Lấy thông tin người dùng từ Google
+    return `Đăng nhập bằng Google thành công` ;
+
+    // Tìm kiếm người dùng theo email
+    
+  },  
   logout: async (req) => {
     // Xử lý đăng xuất người dùng
 

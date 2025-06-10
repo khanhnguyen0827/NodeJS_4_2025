@@ -84,5 +84,8 @@ app.listen(3069, () => {
  * b1: npm i jsonwebtoken
  * b2: tạo file .env với JWT_SECRET=abcdefghijklmnopqrstuvwxyz1234567890
  * 
+ * google-auth-library: dùng để xác thực người dùng với tài khoản Google https://www.npmjs.com/package/google-auth-library
+ * b1: npm i google-auth-library
+ * 
  */
 
