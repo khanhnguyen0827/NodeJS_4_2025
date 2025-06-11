@@ -10,7 +10,4 @@ rootRouter.use('/article', acticlesRouter);
 
 rootRouter.use('/auth', authRouter);
 
-
-
-
 export default rootRouter;
