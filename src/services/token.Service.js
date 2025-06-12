@@ -22,11 +22,16 @@ const tokenService = {
         };
     },
 
-    verifyAccessToken: (token) => {
-       return jwt.verify(token, ACCESS_TOKEN_SECRET);//giai ma
+    verifyAccessToken: (token, ignoreExpiration = false) => {
+       return jwt.verify(token, ACCESS_TOKEN_SECRET, {ignoreExpiration: ignoreExpiration});//giai ma
         //tự throw lỗi
         //jwt.decode(accessToken);//giai ma
         
+    },
+    verifyRefreshToken: (token) => {
+        return jwt.verify(token, REFRESH_TOKEN_SECRET);//giai ma
+        //tự throw lỗi
+        //jwt.decode(refreshToken);//giai ma
     }
 
 

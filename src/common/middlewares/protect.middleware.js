@@ -12,6 +12,10 @@ import prisma from "../prisma/init.prisma.js";
  * @param {Function} next - The next middleware function.
  */
  const protect = async  (req, res, next)=> {
+    // Middleware để bảo vệ các route bằng cách kiểm tra token JWT hợp lệ trong request header
+    // Nếu token bị thiếu hoặc không hợp lệ, ném ra UnauthorizedException
+req.ischeckprotect = true; // Đặt một thuộc tính để xác định rằng middleware đã được thực thi
+
     //kiêm tra token trong request header
     const authHeader = req.headers?.authorization || "";
     const [type, token] = authHeader.split(" ");

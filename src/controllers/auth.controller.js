@@ -31,6 +31,12 @@ const authController = {
         res.status(resData.statusCode).json(resData);
     },
 
+    refreshToken: async (req, res) => {
+        const resutl = await authService.refreshToken(req);
+        const resData = responseSeccess(resutl, "Refresh token successful", 200, "Success");
+        res.status(resData.statusCode).json(resData);
+    },
+
     logout: async (req, res) => {
         const resutl = await authService.logout(req);
         const resData = responseSeccess(resutl, "Logout successful", 200, "Success");
