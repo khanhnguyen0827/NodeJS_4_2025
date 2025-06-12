@@ -154,6 +154,13 @@ const authService = {
     // Tìm kiếm người dùng theo email
     
   },  
+
+  refreshToken: async (req) => {
+   
+    return `refresh token successful`;
+  // Xử lý làm mới token
+  },
+  
   logout: async (req) => {
     // Xử lý đăng xuất người dùng
 
