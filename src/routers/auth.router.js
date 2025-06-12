@@ -11,6 +11,10 @@ authRouter.post("/login", authController.login);
 authRouter.get("/get-info", process,authController.getInfo);
 authRouter.post("/google-login",authController.googleLogin);
 
+authRouter.post("/refresh-token", authController.refreshToken);//lam moi token
+
+
+
 
 authRouter.post("/logout", authController.logout);  
 

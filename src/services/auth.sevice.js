@@ -154,7 +154,29 @@ const authService = {
     // Tìm kiếm người dùng theo email
     
   },  
+
+  refreshToken: async (req) => {
+  const { accessToken ,refreshToken } = req.body;
+  // Kiểm tra xem refreshToken có hợp lệ hay không
+  const decodedRefreshToken = tokenService.verifyRefreshToken(refreshToken);
+  // Nếu refreshToken hợp lệ, tạo mới accessToken
+   const decodedAccessToken = tokenService.verifyAccessToken(accessToken, true);
+  // Nếu accessToken hợp lệ, tạo mới accessToken
+
+  // Kiểm tra xem userID trong accessToken và refreshToken có khớp nhau không
+    if(decodedAccessToken.userID !== decodedRefreshToken.userID) {
+      throw new BadrequestException("Refresh token không hợp lệ");
+    } 
+
+  // Tạo mới accessToken
+  const newToken = tokenService.createTokens(decodedAccessToken.userID);
+  // Trả về accessToken mới
+    return newToken;
+  // Xử lý làm mới token
+  },
+
   logout: async (req) => {
+
     // Xử lý đăng xuất người dùng
 
     // Trong trường hợp này, không có logic cụ thể cho đăng xuất
