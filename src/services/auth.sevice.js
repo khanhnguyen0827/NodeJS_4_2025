@@ -164,11 +164,14 @@ const authService = {
   // Nếu accessToken hợp lệ, tạo mới accessToken
 
   // Kiểm tra xem userID trong accessToken và refreshToken có khớp nhau không
+    if(decodedAccessToken.userID !== decodedRefreshToken.userID) {
+      throw new BadrequestException("Refresh token không hợp lệ");
     } 
 
-    
-
-    return `refresh token successful`;
+  // Tạo mới accessToken
+  const newToken = tokenService.createTokens(decodedAccessToken.userID);
+  // Trả về accessToken mới
+    return newToken;
   // Xử lý làm mới token
   },
 
