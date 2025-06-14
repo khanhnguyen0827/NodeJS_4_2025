@@ -10,7 +10,6 @@ export const roleController = {
 
    findAll: async function (req, res, next) {
       const result = await roleService.findAll(req);
-
       const response = responseSeccess(result, `Get all roles successfully`);
       res.status(response.statusCode).json(response);
    },
