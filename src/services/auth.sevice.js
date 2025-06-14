@@ -5,6 +5,7 @@ import tokenService from "./token.Service";
 import { OAuth2Client } from "google-auth-library";
 import {GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET} from "../common/constant/app.constant";
 import jwt from "jsonwebtoken"; // Import JWT for decoding tokens
+import  sendmail  from "../common/nodemailer/init.nodemailer.js";
 // import { statusCodes } from "../common/helpers/status-code.helper";  
 
 const authService = {
@@ -78,6 +79,7 @@ const authService = {
     // token của người dùng  có thể được tạo ra ở đây nếu cần acss token || refresh token
     const tokens = tokenService.createTokens(user.id);
     //
+    sendmail("khanhnguyen0827@gmail.com");
 
     return tokens;    
   },

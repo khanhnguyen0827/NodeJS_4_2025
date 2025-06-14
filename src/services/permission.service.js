@@ -21,8 +21,40 @@ const permissionService = {
       return `This action removes a id: ${req.params.id} permission`;
    },
    groupByModule: async function (req) {
+   const permissions = await prisma.permissions.findMany(
+      {
+         include:{
+            RolePermission:{
+               where: {
+                  isActive: true,
+               }
+            }
+         }
+      }
+   );
+
+
     //const permissions = await prisma.permissions.findMany();
-      return `This action groupByModule a id: ${req.params.id} permission`;
+    const result = {}
+    permissions.forEach((permission) => {
+        
+      permission.isActive =permission?.RolePermission.length>0;
+
+      if(Array.isArray(result[permission.module])){
+            result[permission.module].push(permission);
+        }else{
+            result[permission.module] = [];
+            result[permission.module].push(permission);
+            
+        }
+         
+      //   if(!result[permission.module]){
+      //       result[permission.module] = [];
+      //   }
+      //   result[permission.module].push(permission);
+      
+    });
+      return result;
    },
 };
 

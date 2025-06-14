@@ -87,5 +87,8 @@ app.listen(3069, () => {
  * google-auth-library: dùng để xác thực người dùng với tài khoản Google https://www.npmjs.com/package/google-auth-library
  * b1: npm i google-auth-library
  * 
+ * nodemailer: dùng để tạo mail trên server với client https://www.npmjs.com/package/nodemailer
+ * b1 npm i nodemailer
+ * 
  */
 

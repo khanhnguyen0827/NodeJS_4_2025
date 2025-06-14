@@ -11,5 +11,6 @@ roleRouter.get('/', roleController.findAll);
 roleRouter.get('/:id', roleController.findOne);
 roleRouter.patch('/:id', roleController.update);
 roleRouter.delete('/:id', roleController.remove);
+roleRouter.post('/toggle-permission', roleController.togglePermission);
 
 export default roleRouter;

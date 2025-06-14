@@ -104,6 +104,19 @@ const roleService = {
    remove: async function (req) {
       return `This action removes a id: ${req.params.id} role`;
    },
+
+   togglePermission: async function (req) {
+     const { roleId, permissionId } = req.body;
+
+     const rolePermissionExist = await prisma.rolePermission.findFirst({where:{roleId:roleId, permissionId:permissionId}});
+
+     if (rolePermissionExist) {
+        await prisma.rolePermission.update({where:{id:rolePermissionExist.id}, data:{isActive:!rolePermissionExist.isActive}}); 
+     } else {
+        await prisma.rolePermission.create({data:{roleId:roleId, permissionId:permissionId, isActive:true}});
+     }
+      return true;
+   },
 };
 
 export default roleService;

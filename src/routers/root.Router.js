@@ -11,7 +11,7 @@ rootRouter.use('/demo', DemoRouter);
 rootRouter.use('/article', acticlesRouter);
 rootRouter.use('/auth', authRouter);
 rootRouter.use('/role', roleRouter);
-roleRouter.use('/permission', permissionRouter);
+rootRouter.use('/permission', permissionRouter);
 
 
 export default rootRouter;

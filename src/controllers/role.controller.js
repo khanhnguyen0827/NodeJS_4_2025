@@ -31,7 +31,12 @@ export const roleController = {
       const result = await roleService.remove(req);
       const response = responseSeccess(result, `Remove role#${req.params.id} successfully`);
       res.status(response.statusCode).json(response);
-   }
+   },
+   togglePermission: async function (req, res, next) {
+      const result = await roleService.togglePermission(req);
+      const response = responseSeccess(result, `Toggle permission#${req.params.id} successfully`);
+      res.status(response.statusCode).json(response);
+   },
 };
 
 export default roleController;
