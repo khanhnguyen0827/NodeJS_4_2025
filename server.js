@@ -90,5 +90,15 @@ app.listen(3069, () => {
  * nodemailer: dùng để tạo mail trên server với client https://www.npmjs.com/package/nodemailer
  * b1 npm i nodemailer
  * 
+ * 
+ * jest: dùng để test code https://www.npmjs.com/package/jest
+ * dùng để viết unit test cho code https://www.npmjs.com/package/jest
+ * npm i jest
+ * 
+ * "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --watch",
+ * 
+ * dùng để tạo file test cho code
+ * npm i @types/jest
+
  */
 

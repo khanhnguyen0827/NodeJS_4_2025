@@ -32,7 +32,6 @@ const authService = {
 
 //mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
 //dúng bcrypt để mã hóa mật khẩu
-
     // const hashedPassword = await bcrypt.hash(password, 10);
    const hashedPassword = bcrypt.hashSync(password, 10);
 
@@ -44,6 +43,7 @@ const authService = {
         email: email,
       },
     });
+
     console.log(usernew);
 
     //usernew.password = undefined; // Ẩn mật khẩu trong kết quả trả về
