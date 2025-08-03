@@ -44,3 +44,7 @@
  * b1: npm i google-auth-library
  * 
  */
+
+
+
+ docker run -d --name mysql-db -p 3307:3306 -e MYSQL_ROOT_PASSWORD=123456
